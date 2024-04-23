@@ -18,7 +18,9 @@ contract KisserScript is Script {
     /// @dev Deploys a new Kisser instance via Greenhouse instance `greenhouse`
     ///      and salt `salt` with `initialAuthed` being the address initially
     ///      auth'ed.
-    function deploy(address greenhouse, bytes32 salt, address initialAuthed) public {
+    function deploy(address greenhouse, bytes32 salt, address initialAuthed)
+        public
+    {
         // Create creation code with constructor arguments.
         bytes memory creationCode = abi.encodePacked(
             type(Kisser).creationCode, abi.encode(initialAuthed)
@@ -44,7 +46,7 @@ contract KisserScript is Script {
         IAuth(self).rely(who);
         vm.stopBroadcast();
 
-        console2.log("Relied", who);
+        console.log("Relied", who);
     }
 
     /// @dev Renounces auth from address `who`.
@@ -53,6 +55,6 @@ contract KisserScript is Script {
         IAuth(self).deny(who);
         vm.stopBroadcast();
 
-        console2.log("Denied", who);
+        console.log("Denied", who);
     }
 }
