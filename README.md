@@ -1,66 +1,54 @@
-## Foundry
+# Kisser • [![Unit Tests](https://github.com/chronicleprotocol/kisser/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/chronicleprotocol/kisser/actions/workflows/unit-tests.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+`Kisser` is a simple contract allowing auth'ed addresses to kiss customers on `IToll` instances. `Kisser`'s simplicity allows _Chronicle Protocol_ to have it auth'ed on `Scribe(Optimistic)` instances as the contract only allows `kiss()` updates and nothing else.
 
-Foundry consists of:
+The contract uses the [`chronicle-std/Auth`](https://github.com/chronicleprotocol/chronicle-std) module for access control.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
 
-## Documentation
+## Installation
 
-https://book.getfoundry.sh/
+Install module via Foundry:
 
-## Usage
-
-### Build
-
-```shell
-$ forge build
+```bash
+$ forge install chronicleprotocol/kisser
 ```
 
-### Test
+## Contributing
 
-```shell
+The project uses the Foundry toolchain. You can find installation instructions [here](https://getfoundry.sh/).
+
+Setup:
+
+```bash
+$ git clone https://github.com/chronicleprotocol/kisser
+$ cd kisser/
+$ forge install
+```
+
+Run tests:
+
+```bash
 $ forge test
+$ forge test -vvvv # Run with full stack traces
+$ FOUNDRY_PROFILE=intense forge test # Run in intense mode
 ```
 
-### Format
+Lint:
 
-```shell
-$ forge fmt
+```bash
+$ forge fmt [--check]
 ```
 
-### Gas Snapshots
+Update gas snapshots:
 
-```shell
-$ forge snapshot
+```bash
+$ forge snapshot [--check]
 ```
 
-### Anvil
+## Dependencies
 
-```shell
-$ anvil
-```
+- [chronicleprotocol/chronicle-std@v2](https://github.com/chronicleprotocol/chronicle-std/tree/v2)
 
-### Deploy
+Deployment via:
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+- [chronicleprotocol/greenhouse@v1](https://github.com/chronicleprotocol/greenhouse/tree/v1)
