@@ -42,8 +42,8 @@ $ forge script \
     --keystore "$KEYSTORE" \
     --password "$KEYSTORE_PASSWORD" \
     --broadcast \
-    --rpc-url $RPC_URL \
-    --sig $(cast calldata "rely(address,address)" $KISSER WHO) \
+    --rpc-url "$RPC_URL" \
+    --sig $(cast calldata "rely(address,address)" "$KISSER" "$WHO") \
     -vvv \
     script/Kisser.s.sol:KisserScript
 ```
@@ -61,8 +61,8 @@ $ forge script \
     --keystore "$KEYSTORE" \
     --password "$KEYSTORE_PASSWORD" \
     --broadcast \
-    --rpc-url $RPC_URL \
-    --sig $(cast calldata "deny(address,address)" $KISSER $WHO) \
+    --rpc-url "$RPC_URL" \
+    --sig $(cast calldata "deny(address,address)" "$KISSER" "$WHO") \
     -vvv \
     script/Kisser.s.sol:KisserScript
 ```
