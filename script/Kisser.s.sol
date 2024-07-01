@@ -15,9 +15,7 @@ import {Kisser_COUNTER as Kisser} from "src/Kisser.sol";
 contract KisserScript is Script {
     /// @dev Deploys a new Kisser instance with `initialAuthed` being the
     ///      address initially auth'ed.
-    function deploy(address initialAuthed)
-        public
-    {
+    function deploy(address initialAuthed) public {
         vm.startBroadcast();
         address deployed = address(new Kisser(initialAuthed));
         vm.stopBroadcast();
