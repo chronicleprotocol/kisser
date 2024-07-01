@@ -48,7 +48,3 @@ $ forge snapshot [--check]
 ## Dependencies
 
 - [chronicleprotocol/chronicle-std@v2](https://github.com/chronicleprotocol/chronicle-std/tree/v2)
-
-Deployment via:
-
-- [chronicleprotocol/greenhouse@v1](https://github.com/chronicleprotocol/greenhouse/tree/v1)

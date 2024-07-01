@@ -6,8 +6,6 @@ import {console2 as console} from "forge-std/Test.sol";
 
 import {IAuth} from "chronicle-std/auth/IAuth.sol";
 
-import {IGreenhouse} from "greenhouse/IGreenhouse.sol";
-
 import {Kisser_COUNTER as Kisser} from "src/Kisser.sol";
 // TODO        ^^^^^^^ Adjust name of Kisser instance.
 
@@ -15,24 +13,13 @@ import {Kisser_COUNTER as Kisser} from "src/Kisser.sol";
  * @notice Kisser Management Script
  */
 contract KisserScript is Script {
-    /// @dev Deploys a new Kisser instance via Greenhouse instance `greenhouse`
-    ///      and salt `salt` with `initialAuthed` being the address initially
-    ///      auth'ed.
-    function deploy(address greenhouse, bytes32 salt, address initialAuthed)
+    /// @dev Deploys a new Kisser instance with `initialAuthed` being the
+    ///      address initially auth'ed.
+    function deploy(address initialAuthed)
         public
     {
-        // Create creation code with constructor arguments.
-        bytes memory creationCode = abi.encodePacked(
-            type(Kisser).creationCode, abi.encode(initialAuthed)
-        );
-
-        // Ensure salt not yet used.
-        address deployed = IGreenhouse(greenhouse).addressOf(salt);
-        require(deployed.code.length == 0, "Salt already used");
-
-        // Plant creation code via greenhouse.
         vm.startBroadcast();
-        IGreenhouse(greenhouse).plant(salt, creationCode);
+        address deployed = address(new Kisser(initialAuthed));
         vm.stopBroadcast();
 
         console.log("Deployed at", deployed);
