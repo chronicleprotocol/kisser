@@ -38,10 +38,10 @@ The deployment process consists of two steps - the actual deployment and the sub
 Deployment:
 
 ```bash
-$ SALT_BYTES32=$(cast format-bytes32-string $SALT) && \
-  forge script \
+$ forge script \
     --keystore "$KEYSTORE" \
     --password "$KEYSTORE_PASSWORD" \
+    --sender "$INITIAL_AUTHED" \
     --broadcast \
     --rpc-url "$RPC_URL" \
     --sig "$(cast calldata "deploy(address)" "$INITIAL_AUTHED")" \
@@ -61,5 +61,5 @@ $ WAT_BYTES32=$(cast format-bytes32-string $WAT) && \
     --etherscan-api-key "$ETHERSCAN_API_KEY" \
     --watch \
     --constructor-args $(cast abi-encode "constructor(address)" "$INITIAL_AUTHED") \
-    src/Kisser.sol:"$SALT"
+    src/Kisser.sol:Kisser_1
 ```
