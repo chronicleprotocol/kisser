@@ -5,6 +5,8 @@ import {IToll} from "chronicle-std/toll/IToll.sol";
 
 import {Auth} from "chronicle-std/auth/Auth.sol";
 
+import {IKisser} from "./IKisser.sol";
+
 /**
  * @title Kisser
  *
@@ -19,31 +21,15 @@ import {Auth} from "chronicle-std/auth/Auth.sol";
  * @author Chronicle Labs, Inc.
  * @custom:security-contact security@chroniclelabs.org
  */
-contract Kisser is Auth {
+contract Kisser is IKisser, Auth {
     constructor(address initialAuthed) Auth(initialAuthed) {}
 
-    /// @notice Kisses address `who` on IToll instance `where`.
-    ///
-    /// @dev Reverts if:
-    ///      - Kisser not auth'ed on IToll instance `where`
-    ///
-    /// @dev Only callable by auth'ed addresses.
-    ///
-    /// @param where The IToll instance to kiss on.
-    /// @param who The address to kiss on the IToll instance.
+    /// @inheritdoc IKisser
     function kiss(address where, address who) external auth {
         IToll(where).kiss(who);
     }
 
-    /// @notice Kisses addresses `whos` on IToll instance `where`.
-    ///
-    /// @dev Reverts if:
-    ///      - Kisser not auth'ed on IToll instance `where`
-    ///
-    /// @dev Only callable by auth'ed addresses.
-    ///
-    /// @param where The IToll instance to kiss on.
-    /// @param whos The addresses to kiss on the IToll instance.
+    /// @inheritdoc IKisser
     function kiss(address where, address[] memory whos) external auth {
         for (uint i; i < whos.length; i++) {
             IToll(where).kiss(whos[i]);
