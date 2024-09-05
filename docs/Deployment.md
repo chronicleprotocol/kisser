@@ -48,18 +48,29 @@ $ forge script \
     -vvv \
     script/Kisser.s.sol:KisserScript
 ```
+In the case of zksync add this final flag:
+
+```
+--zksync
+```
+
 
 The deployment command will log the address of the newly deployed contract address. Store this address in the `$KISSER` environment variable and continue with the verification.
 
 Verification:
 
 ```bash
-$ WAT_BYTES32=$(cast format-bytes32-string $WAT) && \
-  forge verify-contract \
+$ forge verify-contract \
     "$KISSER" \
     --verifier-url "$ETHERSCAN_API_URL" \
     --etherscan-api-key "$ETHERSCAN_API_KEY" \
     --watch \
     --constructor-args $(cast abi-encode "constructor(address)" "$INITIAL_AUTHED") \
     src/Kisser.sol:Kisser_1
+```
+
+In the case of zksync add these final two flags:
+
+```
+--zksync --evm-version london
 ```
